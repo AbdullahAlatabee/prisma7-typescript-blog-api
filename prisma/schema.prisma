@@ -1,21 +1,28 @@
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+    provider = "prisma-client"
+    output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+    provider = "postgresql"
 }
 
 enum Role {
-  USER
-  ADMIN
+    USER
+    ADMIN
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  name  String?
-  role  Role   @default(USER)
+    id      Int      @id @default(autoincrement())
+    email   String   @unique
+    name    String?
+    role    Role     @default(USER)
+    profile Profile?
+}
+
+model Profile {
+    id     Int    @id @default(autoincrement())
+    bio    String
+    user   User   @relation(fields: [userId], references: [id])
+    userId Int    @unique
 }
