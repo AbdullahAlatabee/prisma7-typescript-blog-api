@@ -18,6 +18,7 @@ model User {
     name    String?
     role    Role     @default(USER)
     profile Profile?
+    posts   Post[]
 }
 
 model Profile {
@@ -25,4 +26,14 @@ model Profile {
     bio    String
     user   User   @relation(fields: [userId], references: [id])
     userId Int    @unique
+}
+
+model Post {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    title     String
+    published Boolean  @default(false)
+    author    User     @relation(fields: [authorId], references: [id])
+    authorId  Int
 }
