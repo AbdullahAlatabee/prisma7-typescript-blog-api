@@ -26,6 +26,7 @@
 import { Router } from "express";
 import { prisma } from "../config/database.js";
 import usersRouter from "../modules/users/users.routes.js";
+import profilesRouter from "../modules/profiles/profiles.routes.js";
 
 const router = Router();
 
@@ -46,5 +47,6 @@ router.get("/health/database", async (_req, res) => {
 });
 
 router.use("/users", usersRouter);
+router.use("/profiles", profilesRouter);
 
 export default router;
